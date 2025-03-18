@@ -1,0 +1,21 @@
+PROBLEM:
+#21 - A or An
+
+Given a work, prepend it with the correct indefinite article ("a" or "an") followed by a space based on the following rule: words starting with a vowel (a, e, i, o, or u) are prepended with "an", while words starting with any other letter are prepended with "a".
+
+aOrAn('apple') = 'an apple'
+aOrAn('banana') = 'a banana'
+
+Hint 1: Use the startsWith method on the input string to determine if the input starts with a vowel.
+
+-------------------------------
+SOLUTION:
+
+public String aOrAn(String word) {
+    String firstLetter = word.substring(0,1);
+    if (firstLetter == 'a' || firstLetter == 'e' || firstLetter == 'i' || firstLetter == 'o' || firstLetter == 'u') {
+        return 'an ' + word;
+    } else {
+        return 'a ' + word;
+    }
+}

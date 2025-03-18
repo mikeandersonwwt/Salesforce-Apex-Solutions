@@ -1,0 +1,20 @@
+PROBLEM:
+#20 - Ascending Order
+
+Given three Integers a, b, and c, return true if they are in ascending order. For our purposes, two equal numbers will be considered to be in an ascending order.
+
+ascendingOrder(10, 10, 15) = true
+ascendingOrder(15, 14, 13) = false
+
+Hint 1: The simplest implementation would involve an if/else statement, checking if b is greater than or equal to a, and c is greater than or equal to b. Return true if the condition is met, and false otherwise.
+
+-------------------------------
+SOLUTION:
+
+public Boolean ascendingOrder(Integer a, Integer b, Integer c) {
+    if (b >= a && c >= b) {
+        return true;
+    } else {
+        return false;
+    }
+}
