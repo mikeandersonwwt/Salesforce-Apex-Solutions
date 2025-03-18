@@ -6,7 +6,8 @@ Given Integers a, b, and c, return true if a and b add up to c.
 sumEquals(5, 5, 10) = true
 sumEquals(2, 8, 9) = false
 
-Hint 1: Calculate the sum of a and b and use an if statement to compare it with c
+Hint 1: 
+Calculate the sum of a and b and use an if statement to compare it with c
 
 -------------------------------
 SOLUTION:

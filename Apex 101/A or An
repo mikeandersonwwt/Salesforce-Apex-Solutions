@@ -9,8 +9,8 @@ other letter are prepended with "a".
 aOrAn('apple') = 'an apple'
 aOrAn('banana') = 'a banana'
 
-Hint 1: Use the startsWith method on the input string to determine if the 
-input starts with a vowel.
+Hint 1: 
+Use the startsWith method on the input string to determine if the input starts with a vowel.
 
 -------------------------------
 SOLUTION:
