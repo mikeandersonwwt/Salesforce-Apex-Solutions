@@ -1,0 +1,56 @@
+PROBLEM:
+#54 - Companion Plants
+
+Some plants are considered companion plants. They grow better when planted next to each 
+other. For the purpose of this problem, we consider the following plants to be companions: 
+lettuce and cucumbers, lettuce and onions, onions and carrots, and onions and tomatoes.
+
+Write a function isCompanion that takes as input two strings plant1 and plant2. 
+If the two plants are companion plants based on the criteria described above, return true. 
+Otherwise, return false.
+
+companionPlants('onions', 'lettuce') = true
+companionPlants('lettuce', 'tomatoes') = false
+
+Hint 1:
+Use if/else statements to determine if the inputs are matching plants. 
+If no matching plants found, return false.
+
+Hint 2:
+Try structuring the correct pairs using the following logic: if the first plant is onions, 
+the second should be lettuce, carrots, or tomatoes. If the first plant is lettuce, 
+then the second should be cucumbers or onions. If the first plant is cucumbers, 
+the second should be lettuce. If the first plant is carrots, the second should be onions. 
+If the first plant is tomatoes, the second should be onions. If none of the above match, 
+the plants are not companions.
+
+-------------------------------
+SOLUTION:
+
+public Boolean companionPlants(String plant1, String plant2) {
+    plant1 = plant1 != null ? plant1.trim().toLowerCase() : '';
+    plant2 = plant2 != null ? plant2.trim().toLowerCase() : '';
+    
+if (plant1 == 'lettuce') {
+	if (plant2 == 'cucumbers' || plant2 == 'onions') {
+		    return true;
+	    }
+    } else if (plant1 == 'cucumbers') {
+	    if (plant2 == 'lettuce') {
+		    return true;
+	    }
+    } else if (plant1 == 'onions') {
+	    if (plant2 == 'lettuce' || plant2 == 'carrots' || plant2 == 'tomatoes') {
+		    return true;
+	    }
+    } else if (plant1 == 'carrots') {
+	    if (plant2 == 'onions') {
+		    return true;
+	    }
+    } else if (plant1 == 'tomatoes') {
+	    if (plant2 == 'onions') {
+		    return true;
+	    }
+    } 
+    return false;
+}

@@ -1,0 +1,32 @@
+PROBLEM:
+#11 - Name from Emil
+
+Implement a function nameFromEmail that takes as input a valid email address in the format 
+firstname.lastname@example.com. The function should extract the first name and last name 
+from this email address and return a capitalized full name (i.e. FirstName LastName). 
+Assume that the input will always be a valid email address with both the first name and 
+last name separated by a period (.).
+
+nameFromEmail('john.doe@apexsandbox.io') = 'John Doe'
+nameFromEmail('JANE.DOE@GMAIL.COM') = 'Jane Doe'
+
+Hint 1:
+There are multiple ways to solve this problem and multiple methods in the String class that 
+you can utilize. These include indexOf, indexOfChar, toLowerCase, substring, substringBefore, 
+substringBetween, and capitalize. See the documentation of the String class for details on these methods.
+
+Hint 2:
+Use a substringBefore methods to extract the substring occuring before the '.' character. 
+Then, use a substringBetween method to extract the substring occuring between the '.' and '@' characters. 
+Finally, use toLowerCase and capitalize methods to fully extract the first and last name.
+
+-------------------------------
+SOLUTION:
+
+public String nameFromEmail(String email) {
+    String first = email.substringBefore('.').toLowerCase();
+    first = first.substring(0, 1).toUpperCase() + first.substring(1);
+    String last = email.substringBetween('.','@').toLowerCase();
+    last = last.substring(0, 1).toUpperCase() + last.substring(1);
+    return (first + ' ' + last);
+}

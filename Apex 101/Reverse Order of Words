@@ -1,0 +1,31 @@
+PROBLEM:
+#113 - Reverse Order of Words
+
+Implement a function reverseWordsInASentence that will take a String containing words 
+separated by spaces as an argument, and return a string with the order of the words reversed.
+
+Example : If the sentence is The quick brown fox jumps over the lazy dog, then 
+reverseWordsInASentence(String sentence) should evaluate to dog lazy the over jumps fox brown quick The
+
+Hint 1:
+First, reverse the whole sentence then reverse the words of that sentence.
+
+Hint 2:
+If you are failing the first test case then make sure that there are no additional spaces 
+before or at the end of the reversed words sentence.
+
+-------------------------------
+SOLUTION:
+
+public String reverseWordsInASentence(String sentence){
+    if (sentence == null) {
+        return null;
+    }
+    List<String> words = sentence.split(' ');
+    List<String> reversedWords = new List<String>();
+    for (Integer i = words.size() - 1; i >= 0; i--) {
+        reversedWords.add(words[i]);
+    }
+    String reversedSentence = String.join(reversedWords, ' ');
+    return reversedSentence;
+}

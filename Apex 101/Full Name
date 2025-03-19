@@ -1,0 +1,18 @@
+PROBLEM:
+#9 - Full Name
+
+Given two non-empty strings firstName and lastName, return the name as a single string with 
+a space in between (firstName lastName).
+
+formatName('Jane', 'Doe') = 'Jane Doe'
+
+Hint 1:
+Use the + operator to concatenate strings together into a single string.
+
+-------------------------------
+SOLUTION:
+
+public String formatName(String firstName, String lastName) {
+    fullName = (firstName + ' ' + lastName);
+    return fullName;
+}

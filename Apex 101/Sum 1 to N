@@ -1,0 +1,23 @@
+PROBLEM:
+#16 - Sum 1 to N
+
+Implement the method sumToN that calculates and returns the sum of all numbers (inclusive) 
+from 1 to n. Assume that n will be non-zero positive integer.
+
+sumToN(5) = 15
+sumToN(2) = 3
+
+Hint 1:
+You can use a for loop to loop through integers 1 through n, and keep adding them to a variable.
+
+Hint 2:
+You may remember a different approach from a Math class: there is a very simple formula to 
+calculate the sum of the first n Natural Numbers.
+
+-------------------------------
+SOLUTION:
+
+public Integer sumToN(Integer n) {
+    Integer total = (n * (n + 1))/2;
+    return total;
+}

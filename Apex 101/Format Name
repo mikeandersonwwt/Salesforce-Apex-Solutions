@@ -1,0 +1,30 @@
+PROBLEM:
+#
+
+Given two strings firstName and lastName, return the name in the format LastName, FirstName. 
+In case one of the names is null or empty, return only the non-empty part of the name. 
+If both are null or empty, return an empty string.
+
+formatName('Jane', 'Doe') = 'Doe, Jane'
+formatName('Jane', '') = 'Jane'
+
+Hint 1:
+Use the + operator to concatenate strings together into a single string.
+
+Hint 2:
+Use String.IsBlank(inputString) to check if inputString is null or empty.
+
+-------------------------------
+SOLUTION:
+
+public String formatName(String firstName, String lastName) {
+    if (((String.IsBlank(firstName)) || firstName == null) && ((String.IsBlank(lastName)) || lastName == null)) {
+        return '';
+    } else if ((String.IsBlank(firstName)) || firstName == null) {
+        return lastName;
+    } else if ((String.IsBlank(lastName)) || lastName == null) {
+        return firstName;
+    } else {
+	    return (lastName + ', ' + firstName);
+    }
+}

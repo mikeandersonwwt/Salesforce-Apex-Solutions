@@ -1,0 +1,50 @@
+PROBLEM:
+#8 - Next Prime
+
+A prime number is a number greater than 1 that is not evenly divisible by any number greater 
+than one and smaller than itself. For example, 13 is a prime number because it is not evenly 
+divisible by any number from 2 to 12.
+
+Implement the function nextPrime that takes as input an integer num and returns the smallest 
+prime number greater than num.
+
+nextPrime(10) = 11. 11 is the smallest prime number greater than 10
+
+nextPrime(8) = 11. 11 is the smallest prime number greater than 8
+
+Hint 1:
+Use the Math.mod function to calculate the remainder after a division. A remainder of 0 means 
+the first input was evenly divisible by the second.
+
+Hint 2:
+To detect if a number n is a prime number, loop through all Integers from 2 to n - 1, and 
+test for divisibility for each number.
+
+Hint 3:
+Start looping over numbers starting at num + 1 and test each for primality until a valid 
+prime number is found. You can create another method that tests for primality right after 
+the isPrime method.
+
+-------------------------------
+SOLUTION:
+
+public Integer nextPrime(Integer num) {
+    if (num < 0) {
+        return 2;
+    }
+    
+    Integer x = num + 1;
+    while (!isPrime(x)) {
+        x++;
+    }
+    return x;
+
+}
+public static Boolean isPrime(Integer n) {
+    for (Integer i = 2; i < n - 1; i++) {
+        if (Math.mod(n, i) == 0) {
+            return false;
+        }
+    }
+    return true;
+}

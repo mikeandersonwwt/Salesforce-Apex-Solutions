@@ -1,0 +1,22 @@
+PROBLEM:
+#5 - Even or Odd
+
+Given an Integer, return 'even' if the Integer is even, or 'odd' if the Integer is odd. 
+Remember to use the Math.mod function.
+
+evenOrOdd(15) = 'odd'
+evenOrOdd(-64) = 'even'
+
+Hint 1:
+Use the Math.mod function to compute the remainder after dividing the number by 2
+
+-------------------------------
+SOLUTION:
+
+public String evenOrOdd(Integer num) {
+    if (Math.mod(num, 2) == 0) {
+        return 'even';
+    } else {
+        return 'odd';
+    }
+}

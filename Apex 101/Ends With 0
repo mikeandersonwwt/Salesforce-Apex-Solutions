@@ -1,0 +1,25 @@
+PROBLEM:
+#90 - Ends With 0
+
+Given an integer, return true if the integer ends with 0, otherwise return false.
+
+isEndWithZero(12) == false
+isEndWithZero(1230) == true
+
+Hint 1:
+Call the Math.mod function to calculate the reminder of given number.
+
+Hint 2:
+Use an if/else statement, checking if the remainder of given number is equal to 0 or not. 
+Return true or false depending on the result of the comparison.
+
+-------------------------------
+SOLUTION:
+
+public Boolean isEndWithZero(Integer num){
+    if (Math.mod(num, 10) == 0) {
+        return true;
+    } else {
+        return false;
+    }
+}

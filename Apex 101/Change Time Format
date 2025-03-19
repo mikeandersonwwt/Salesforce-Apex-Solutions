@@ -1,0 +1,45 @@
+PROBLEM:
+#79 - Change Time Format
+
+13:50 and 01:50 PM are 24-hour and 12-hour representations of the same time. Implement the 
+method changeTimeFormat that takes as input a string strTime formatted as a 24-hour string, 
+and returns the equivalent 12-hour string.
+
+Examples:
+changeTimeFormat('08:05') returns '08:05 AM'
+changeTimeFormat('00:05') returns '12:05 AM'
+changeTimeFormat('23:15') returns '11:15 PM'
+
+Hint 1:
+There are several methods provided by Apex that you can use to solve this problem in the 
+String and Integer classes: Integer.valueOf, String.split, String.substring and String.valueOf.
+
+Hint 2:
+Use split or substring methods to put the hour and minute components of the passed string 
+into separate variables. Use Integer.valueOf to convert them to integer values.
+
+-------------------------------
+SOLUTION:
+
+public String changeTimeFormat(String strTime) {
+    // Split the time into hours and minutes
+    List<String> timeParts = strTime.split(':');
+    Integer hour = Integer.valueOf(timeParts[0]);
+    String minute = timeParts[1];
+
+    // Determine AM or PM
+    String period = (hour < 12) ? 'AM' : 'PM';
+
+    // Convert hour to 12-hour format
+    if (hour == 0) {
+        hour = 12;  // Midnight case
+    } else if (hour > 12) {
+        hour = hour - 12;  // Convert 24-hour format to 12-hour format
+    }
+
+    // Format hour to always have two digits (e.g., 08:05 AM)
+    String formattedHour = (hour < 10) ? '0' + String.valueOf(hour) : String.valueOf(hour);
+
+    // Return the time in 12-hour format with AM/PM
+    return formattedHour + ':' + minute + ' ' + period;
+}
