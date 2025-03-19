@@ -1,0 +1,36 @@
+PROBLEM:
+#126 - Insert Student
+
+The method insertStudent takes as input strings name and email, and returns a record ID. 
+Implement the method to insert an apxio__Student__c record with the Name and 
+apxio__Email__c fields filled out, and return the Id of the new record.
+
+You will be working with the following custom object and field names for this problem:
+
+apxio__Student__c
+apxio__Student__c.apxio__Email__c
+
+Hint 1:
+Create an apxio__Student__c record using the new keyword.
+
+Hint 2:
+Use the assignment operator to set values on fields on the record.
+
+Hint 3:
+The record is not inserted into the database until you use the insert statement to insert it.
+
+Hint 4:
+The Id should be available on the record right after the insert statement. You do not need a SOQL query to retrieve the Id.
+
+-------------------------------
+SOLUTION:
+
+public Id insertStudent(String name, String email) {
+    // Create the new student, insert, and return the Id
+    apxio__Student__c newStudent = new apxio__Student__c(
+    Name = name, 
+    apxio__Email__c = email);  
+    
+    insert newStudent;
+    return newStudent.Id;
+}

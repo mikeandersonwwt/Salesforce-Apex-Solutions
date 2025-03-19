@@ -1,0 +1,58 @@
+PROBLEM:
+#134 - Class from Course
+
+Implement the method classFromCourse that takes as input a string courseName, creates an 
+apxio__Class__c record associated with the course named courseName, and returns the Id of 
+the new record. The new class should have the same Name as the course.
+
+You should not create a new apxio__Course__c record. The new class should be linked to the 
+course that already exists in the database. In case no course with the given name is found, 
+do not create any class record and return null.
+
+You will be working with the following custom object and field names for this problem:
+apxio__Course__c
+apxio__Class__c
+apxio__Class__c.apxio__Course__c
+
+Hint 1:
+Use a SOQL query with a WHERE clause to retrieve the existing apxio__Course__c record. 
+Use a bind variable in your SOQL query to make sure you only retrieve the necessary record.
+
+Hint 2:
+Assign the results of the query to a variable of type List<apxio__Course__c> instead of 
+apxio__Course__c. Even though the SOQL query will never return more than one record for our 
+test cases, assigning to an sObject instead of a List will throw an error if zero records are returned.
+
+Hint 3:
+Copy the Id of the apxio__Course__c record into the lookup field on apxio__Class__c record.
+
+Hint 4:
+The Id should be available on the record right after the insert statement. 
+You do not need a SOQL query to retrieve the Id of the inserted record.
+
+-------------------------------
+SOLUTION:
+
+public Id classFromCourse(String courseName) {
+    // Query for existing course with the same name
+    List <apxio__Course__c> existingCourses = [
+        SELECT  Id 
+        FROM    apxio__Course__c
+        WHERE   Name = :courseName
+        LIMIT   1
+    ];
+    // If no course is found, return null 
+    if (existingCourses.isEmpty()) {
+        return null;
+    }
+    // Get the Id of the first (and only) course found
+    apxio__Course__c existingCourse = existingCourses[0];
+    //Create a new class record associated with the existing course
+    apxio__Class__c newClass = new apxio__Class__c(
+        apxio__Course__c = existingCourse.Id,
+        Name = courseName
+    );
+    //Insert the new record and return its id
+    insert newClass;
+    return newClass.Id;
+}

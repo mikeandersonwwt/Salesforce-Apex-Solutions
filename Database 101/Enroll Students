@@ -1,0 +1,64 @@
+PROBLEM:
+#135 - Enroll Students
+
+Implement the method enrollStudents that takes as input a list of strings emails and a 
+string className. The method should enroll all students with the provided emails into a 
+class with the given name by creating apxio__Class_Enrollment__c records.
+
+Note that apxio__Student__c and apxio__Class__c records already exist in the database.
+
+You will be working with the following custom object and field names for this problem:
+apxio__Student__c
+apxio__Student__c.apxio__Email__c
+apxio__Class__c
+apxio__Class_Enrollment__c
+apxio__Class_Enrollment__c.apxio__Student__c
+apxio__Class_Enrollment__c.apxio__Offered_Class__c
+
+Hint 1:
+Use SOQL queries to retrieve apxio__Student__c and apxio__Class__c records from the database. 
+Make sure you include a WHERE clause with bind variables to ensure you are retrieving only 
+the relevant records.
+
+Hint 2:
+Loop over apxio__Student__c records retrieved using SOQL, and create a new 
+apxio__Class_Enrollment__c record for each student. Make sure you populate the 
+apxio__Student__c and apxio__Offered_Class__c lookup fields on the enrollment record.
+
+Hint 3:
+Make sure to bulkify your code by avoiding SOQL queries or DML statements inside the loop. 
+Make sure your SOQL queries execute before the loop, and your DML statement executes after 
+the loop.
+
+-------------------------------
+SOLUTION:
+
+public void enrollStudents(List<String> emails, String className) {
+    // Query for students with the given emails
+    List <apxio__Student__c> students = [
+        SELECT  Id, apxio__Email__c 
+        FROM    apxio__Student__c
+        WHERE   apxio__Email__c
+        IN      :emails
+    ];
+    // Query for the class with the given name
+    apxio__Class__c offeredClass = [
+        SELECT  Id
+        FROM    apxio__Class__c
+        WHERE   Name = :className
+        LIMIT   1
+    ];
+    // Create a list to hold the records
+    List<apxio__Class_Enrollment__c> enrollments = new List<apxio__Class_Enrollment__c>();
+    // Loop through students and create new records
+    for (apxio__Student__c student : students) {
+        apxio__Class_Enrollment__c enrollment = new apxio__Class_Enrollment__c();
+        enrollment.apxio__Student__c = student.Id;
+        enrollment.apxio__Offered_Class__c = offeredClass.Id;
+        enrollments.add(enrollment);
+    }
+    // Insert new records
+    if (!enrollments.isEmpty()) {
+        insert enrollments;
+    }
+}
