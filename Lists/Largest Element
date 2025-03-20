@@ -1,0 +1,43 @@
+PROBLEM:
+#2 - Largest Element
+
+Implement the method findLargest that takes as input a non-empty list of Integers nums, 
+and returns the largest Integer in the list.
+
+Example: findLargest(new List {5, 2, 8, 4, 2, 1}) evaluates to 8 because 8 is the 
+largest Integer in the list.
+
+Hint 1:
+Use the .size() function to obtain the size of the input list
+
+Hint 2:
+Use the [] notation or the .get(index) method to obtain the element at index.
+
+Hint 3:
+Declare an Integer to hold the largest value and initialize it with the element at index 0 in 
+the list. Use a for loop to check if each element in the list is the largest encountered so far.
+
+-------------------------------
+SOLUTION:
+
+public static Integer findLargest(List<Integer> nums) {
+    nums.sort();
+    Integer largest = nums.get(nums.size() - 1);
+    return largest;
+}
+
+OR
+
+public static Integer findLargest(List<Integer> nums) {
+    // Initialize the largest value as the first element of the list
+    Integer largest = nums.get(0);
+    // Loop through the list starting from the second element (index 1)
+    for (Integer i = 1; i < nums.size(); i++) {
+        // If the current element is greater than the largest found so far, update largest
+        if (nums.get(i) > largest) {
+            largest = nums.get(i);
+        }
+    }
+    // Return the largest value found in the list
+    return largest;
+}

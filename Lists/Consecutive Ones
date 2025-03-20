@@ -1,0 +1,35 @@
+PROBLEM:
+#119 - Consecutive Ones
+
+Given a List of Integers containing only binary numbers (0 and 1), return the maximum 
+number of consecutive 1s appearing in the List.
+
+Example : Input: [1,1,0,1,1,1,1] Output: 4. The array has 2 consecutive 1s starting 
+index 0, and 4 consecutive 1s starting index 3.
+
+Hint 1:
+Count the 1's until a 0 or the end of the array shows up, saving the result in a variable 
+if it is larger than the current value.
+
+-------------------------------
+SOLUTION:
+
+public Integer maxConsecutiveOnes(Integer[] numbers) {
+    // Declare an integer for both max count and current count
+    Integer maxCount = 0;
+    Integer currentCount = 0;
+    // Iterate over the array of numbers
+    for (Integer num : numbers) {
+        // If it's 1 increment the current count
+        if (num == 1) {
+            currentCount++;
+        } else {
+            // If it's 0, compare current to max and reset current in not greater than max
+            maxCount = Math.max(maxCount, currentCount);
+            currentCount = 0;
+        }
+    }
+    // After the loop, check again to see if the array ends with a higher count
+    maxCount = Math.max(maxCount, currentCount);
+    return maxCount;
+}
