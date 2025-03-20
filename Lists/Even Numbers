@@ -1,0 +1,29 @@
+PROBLEM:
+#70 - Even Numbers
+
+Given a non-zero positive integer n, return a list of the first n non-zero positive 
+even numbers, ordered ascending.
+
+Example: evenNumbers(5) returns a list containing the numbers 2, 4, 6, 8, 10.
+
+Hint 1:
+Use the add method to add items to a new list
+
+Hint 2: 
+Start a loop at number 2, add 2 to the number on every loop, and loop until n * 2 to 
+generate a list of n even numbers.
+
+-------------------------------
+SOLUTION:
+
+public List<Integer> evenNumbers(Integer n) {
+    // Declare the new list
+    List<Integer> numbers = new List<Integer>();
+    // Loop through the numbers and add to the new list
+    for (Integer i = 2; i <= n * 2; i+=2) {
+        numbers.add(i);
+    }
+    // Sort & return the new list   
+    numbers.sort();
+    return numbers;
+}

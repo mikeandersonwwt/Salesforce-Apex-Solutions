@@ -1,0 +1,34 @@
+PROBLEM:
+#138 - Count Target in List
+
+Given a list of Integers nums and an Integer target, count number of times target is found 
+in nums. If the target is not in the list, simply return 0.
+
+Hint 1:
+Given List nums = new List{5, 2, 8, -4, 8, 1, 11};
+findTargetCount(nums, 12) => 0
+findTargetCount(nums, 8) => 2
+findTargetCount(nums, 11) => 1
+findTargetCount(nums, -4) => 1
+
+Hint 2:
+Use a for loop to loop over the list, and maintain an integer variable for the count.
+
+Hint 3:
+Inside the loop, use an if statement to check if the current list item in the loop equals 
+target. If true, add one to the count variable.
+
+-------------------------------
+SOLUTION:
+
+public Integer findTargetCount(List<Integer> nums, Integer target) {
+    // Declare an integer to hold the count
+    Integer count = 0;
+    // Loop through each looking for a match and tally the count
+    for (Integer i = 0; i < nums.size(); i++) {
+        if (nums.get(i) == target) {
+            count++;
+        }       
+    }
+    return count;
+}
