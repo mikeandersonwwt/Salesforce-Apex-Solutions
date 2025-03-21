@@ -1,0 +1,37 @@
+PROBLEM:
+#136 - Number Average
+
+Given a list of decimals, return the average rounded to two decimal places.
+
+Example:
+List numbers = new List{10.5, 20, 45, 89}
+average(numbers) = 41.12
+
+The average computes to 41.125, which is rounded to 41.12 using the default "half even" rounding method.
+
+Hint 1:
+Declare an Integer and use the .size() function to obtain the size of the list
+
+Hint 2:
+Declare a Decimal to hold the sum and initialize it with 0. Use a for loop to add each 
+element in the list to the variable
+
+Hint 3:
+Calculate the average and use the setScale method from the Decimal class to round numbers. 
+Finally, return the calculated average.
+
+-------------------------------
+SOLUTION:
+
+public Decimal average(List<Decimal> numbers){
+    // Declare an integer to hold the sum
+    Integer count = numbers.size();
+    Decimal sum = 0;
+    // Loop through each number and add it to the sum
+    for (Integer i = 0; i < numbers.size(); i++) {
+        sum += numbers.get(i);
+    }
+    // Set total to be the avg and return the decimal scaled to 2
+    Decimal total = sum / count;
+    return total.setScale(2);
+}

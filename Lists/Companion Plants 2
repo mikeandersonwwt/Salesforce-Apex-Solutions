@@ -1,0 +1,67 @@
+PROBLEM:
+#55 - Companion Plants 2
+
+Some plants are considered companion plants. They grow better when planted next to each 
+other. For the purpose of this problem, we consider the following plants to be companions: 
+lettuce and cucumbers, lettuce and onions, onions and carrots, and onions and tomatoes. 
+The same plants planted next to each other are not considered companions.
+
+Write a function isCompanion that takes as input a list of plants being planted in a row. 
+Return true only if every plant in the list is planted next to a companion and return false otherwise.
+
+companionPlants(new List { 'onions', 'lettuce', 'onions', 'carrots', 'onions', 'lettuce', 'cucumbers'}) = true
+companionPlants(new List { 'lettuce', 'onions', 'carrots', 'lettuce', 'cucumbers'}) = false. 
+We have non-companion plants carrots and lettuce planted together
+
+Hint 1:
+Loop over elements 0 to size-1, and for each iteration determine if the current element and 
+the next element are companions
+
+Hint 2:
+Try determining if a pair being examined are companions using the following if/else logic: if 
+the first plant is onions, the second should be lettuce, carrots, or tomatoes. If the first plant 
+is lettuce, then the second should be cucumbers or onions. If the first plant is cucumbers, the 
+second should be lettuce. If the first plant is carrots, the second should be onions. If the first 
+plant is tomatoes, the second should be onions. If none of the above match, the plants are not companions.
+
+-------------------------------
+SOLUTION:
+
+public Boolean companionPlants(List<String> plants) {  
+    // If there is only one plant it has no companion
+    if (plants.size() == 1) {
+        return false;
+    }
+    // Loop over the list of plants, checking consecutive pairs
+    for (Integer i = 0; i < plants.size() - 1; i++) {
+        String plant1 = plants[i];
+        String plant2 = plants[i + 1];
+        // Check if the two plants are companions
+        if (!areCompanions(plant1, plant2)) {
+            return false;  // If any pair is not a companion, return false
+        }
+    }
+    // If all pairs are companions, return true
+    return true;
+}
+
+// Helper method to check if two plants are companions
+private Boolean areCompanions(String plant1, String plant2) {
+    if (plant1 == 'onions') {
+        return (plant2 == 'lettuce' || plant2 == 'carrots' || plant2 == 'tomatoes');
+    }
+    if (plant1 == 'lettuce') {
+        return (plant2 == 'cucumbers' || plant2 == 'onions');
+    }
+    if (plant1 == 'cucumbers') {
+        return (plant2 == 'lettuce');
+    }
+    if (plant1 == 'carrots') {
+        return (plant2 == 'onions');
+    }
+    if (plant1 == 'tomatoes') {
+        return (plant2 == 'onions');
+    }
+    // If no match is found, the plants are not companions
+    return false;
+}
