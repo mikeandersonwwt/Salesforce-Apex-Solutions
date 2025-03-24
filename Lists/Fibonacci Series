@@ -1,0 +1,38 @@
+PROBLEM: 
+#69 - Fibonacci Series
+
+The first two numbers in the fibonacci sequence are 1, and all other numbers in the 
+sequence are defined as the sum of the two preceding fibonacci numbers. The first 10 
+numbers in the fibonacci sequence are 1, 1, 2, 3, 5, 8, 13, 21, 34, and 55.
+
+Given a non-zero positive integer n, return a list of integers of size n containing 
+(in correct order) the first n numbers in the fibonacci series.
+
+Example: fibonacciSeries(5) returns a list containing the numbers 1, 1, 2, 3, and 5.
+
+Hint 1:
+Use the add method to add items to a new list
+
+Hint 2:
+For n > 2, start with a list of first two fibinacci numbers, and use a loop to fill out 
+the remaining series.
+
+-------------------------------
+SOLUTION:
+
+public List<Integer> fibonacciSeries(Integer n) {
+    // Declare the new list
+    List<Integer> series = new List<Integer>();
+    // add the first number    
+    series.add(1);
+    // add the second number if n > 1
+    if (n > 1) {
+        series.add(1);
+    }
+    // Calculate the numbers for n > 2
+    for (Integer i = 2; i < n; i++) {
+        Integer next = series[i - 1] + series[i - 2];
+        series.add(next);
+    }
+    return series;
+}

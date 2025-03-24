@@ -1,0 +1,74 @@
+PROBLEM:
+#73 - Sorted List
+
+A list is considered to be sorted ascending when no element in the list is smaller than the 
+preceding element if one is present. Similarly, a list is considered sorted descending if no 
+element in the list is larger than the preceding element if any.
+
+Implement the method isSorted that takes as input a list of integers numbers, returns true if 
+the list is sorted in any direction (acsending or descending), and returns false otherwise.
+
+Example: 
+isSorted(new List<Integer> {5, 2, 0, -1}) evaluates to true because the input list is sorted descending.
+
+Hint 1:
+Lists with less than 3 elements are always sorted.
+
+Hint 2:
+Loop over the entire list to see if either the ascending or descending condition is broken 
+by any element. If at least one of the two conditions is unbroken throughout the array, the 
+list is sorted.
+
+Hint 3:
+For a more efficient approach, start by looping over the list until you encounter an element 
+that differs from the previous one.
+
+Hint 4:
+Once you have encountered a different element, determine which sort order the rest of the 
+list should maintain. Continue looping and ensuring the sort order is maintained and return 
+false as soon as it is broken.
+
+-------------------------------
+SOLUTION:
+
+public boolean isSorted(List<Integer> numbers) {
+    // Lists with less than 3 elements are always sorted.
+    if (numbers.size() < 3) {
+        return true;
+    }
+    Boolean isAscending = null;
+    // Loop through the list to determine sort order
+    for (Integer i = 1; i < numbers.size(); i++) {
+        Integer current = numbers.get(i);
+        Integer previous = numbers.get(i - 1);
+        // Find the first different pair and determine sort order
+        if (current != previous) {
+            // If it's the first non-equal pair, set the sort order
+            isAscending = current > previous;
+            break;
+        }
+    }
+    // If no different pair is found, the list is sorted by default (either all equal or not needed to check)
+    if (isAscending == null) {
+        return true; // All elements are equal or the list is trivially sorted
+    }
+    // Check if the list follows the determined order
+    for (Integer i = 1; i < numbers.size(); i++) {
+        Integer current = numbers.get(i);
+        Integer previous = numbers.get(i - 1);
+        // Check the current element follows the determined order
+        if (isAscending) {
+            // If ascending, current should be greater than or equal to previous
+            if (current < previous) {
+                return false;
+            }
+        } else {
+            // If descending, current should be less than or equal to previous
+            if (current > previous) {
+                return false;
+            }
+        }
+    }
+    // If no violations found, the list is sorted
+    return true;
+}
