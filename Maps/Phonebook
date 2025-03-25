@@ -1,0 +1,44 @@
+PROBLEM:
+#84 - Phonebook
+
+Implement the method phonebook that takes as input a list of Contacts, and returns a Map 
+containing the full names as keys, and the contact's phone number as values. Do not include 
+contacts without a phone number into the phonebook.
+
+For example, given the following contacts:
+
+c1
+Name: 'Bryan McCartney'
+Phone: '2143452398'
+
+c2
+Name: 'Janice Gonzalez'
+Phone: '6923849837'
+
+The method call phonebook(new List {c1, c2}) should return a map containing the following 
+key/value pairs:
+'Bryan McCartney' -> '2143452398'
+'Janice Gonzalez' -> '6923849837'
+
+Hint 1:
+The put method in the Map class allows you to add a key/value pair to a map.
+
+Hint 2:
+Declare a new variable of type Map. Loop over the contact list and use the put method to put each 
+key/value pair into the map, provided the Contact's Phone is not null. Finally, return the map.
+
+-------------------------------
+SOLUTION:
+
+public Map<String, String> phonebook(List<Contact> contacts) {
+    // Declare the new map
+    Map<String, String> contactPairs = new Map<String, String>();
+    // iterate through each contact in the list
+    for (Contact c : contacts) {
+        // Check for null phone number and add if not null
+        if (c.Phone != null) {
+            contactPairs.put(c.Name, c.Phone);
+        }
+    }
+    return contactPairs;
+}
