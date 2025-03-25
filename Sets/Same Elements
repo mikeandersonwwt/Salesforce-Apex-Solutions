@@ -1,0 +1,37 @@
+PROBLEM:
+#81 - Same Elements
+
+Implement the method sameElements that takes as input two lists of integers nums1 and nums2, 
+and returns true if and only if every integer in one of the lists is also contained by the 
+other list. This means that for sameElements to return true, there should be no integer in 
+nums1 that is not present in nums2, and no integer in nums2 that is not present in nums1.
+
+Note that the lists may contain duplicates and your solution should assume no specific ordering.
+
+Examples:
+sameElements(new List {5, 7}, new List {7, 5, 5}) evaluates to true
+sameElements(new List {5, 7}, new List {7, 5, 9}) evaluates to false
+
+Hint 1:
+The problem boils down to checking if the two lists represent the same set. 
+Use the Set class to solve this problem.
+
+Hint 2:
+Create two sets containing elements from each list. If all elements in nums1 are present 
+in nums2, and all elements in nums2 are present in nums1, return true.
+
+-------------------------------
+SOLUTION:
+
+public Boolean sameElements(List<Integer> nums1, List<Integer> nums2) {
+    // Create two sets containing elements from each list
+    Set<Integer> set1 = new Set<Integer>();
+        set1.addAll(nums1);
+    Set<Integer> set2 = new Set<Integer>();
+        set2.addAll(nums2);
+    if (set1.containsAll(set2) && set2.containsAll(set1)) {
+        return true;
+    } else {
+        return false;
+    }
+}
