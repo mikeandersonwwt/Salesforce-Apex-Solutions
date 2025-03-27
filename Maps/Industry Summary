@@ -45,3 +45,20 @@ current account's AnnualRevenue into the value, and put the calculated value bac
 -------------------------------
 SOLUTION:
 
+public Map<String, Decimal> industrySummary(List<Account> accounts) {
+    // Declare the new map for the industry and annual revenue
+    Map<String, Decimal> revenue = new Map<String, Decimal>();
+    // Loop through the list of accounts
+    for (Account acc : accounts) {
+        // Check if the industry already exists
+        if (revenue.containsKey(acc.Industry)) {
+            // If yes, add the revenue the the industry total
+            revenue.put(acc.Industry, revenue.get(acc.Industry) + acc.AnnualRevenue);
+        } else {
+            // If no, create a new entry for the industry with revenue
+            revenue.put(acc.Industry, acc.AnnualRevenue);
+        }
+    }
+    // Return the map with industry and summed up revenue
+    return revenue;
+}
