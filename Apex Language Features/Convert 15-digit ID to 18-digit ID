@@ -1,0 +1,33 @@
+PROBLEM:
+#93 - Convert 15-digit ID to 18-digit ID
+
+Implement the method convert15to18DigitId() , which accepts a String of length 15 digit and returns a 
+new String with 18 digit salesforce Id. If the input string length is not equal to 15 digits, then return '-1'.
+
+Given the following test code:
+String fifteenDigit = '0SO90000000PBDu';
+String eighteenDigit = convert15to18DigitId(fifteenDigit);
+eighteenDigit should be equal to '0SO90000000PBDuGAO'
+
+Note:
+Use case 1: You have exported a Salesforce report with Ids. These Ids are 15 characters. 
+You want to ensure that these Ids are not altered by Excel, you need to manage them with 18 characters.
+
+Use case 2: You need to compare Ids but your comparison mechanism is not case sensitive. 
+You will have to extend them to 18 characters
+
+Hint 1:
+Try to use Id instead of String data type.
+
+-------------------------------
+SOLUTION:
+
+public String convert15to18DigitId(String fifteenDigit) {
+    // Check if Id length is 15 characters, return -1 if not
+    if (fifteenDigit == null || fifteenDigit.length() != 15) {
+        return '-1'; 
+    }
+    // Convert 15-digit ID to 18-digit ID using the Id data type
+    Id id18 = Id.valueOf(fifteenDigit);
+    return String.valueOf(id18);
+}

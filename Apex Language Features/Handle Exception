@@ -1,0 +1,36 @@
+PROBLEM:
+#97 - Handle Exception
+
+Implement the method divide which takes two integers a and b as input, divides a by b using the / operator, 
+and returns the result. If any exception occurs, the method should return the exception message.
+
+Given the following test code:
+String result = divide(10,0);
+result should be 'Divide by 0';
+
+Given the following test code:
+String result = divide(100, 18);
+result should be '5';. The result of integer division 100/19 is 5 with a remainder of 10.
+
+Hint 1:
+Dividing two integers evaluates to an integer, but the method's return type is String. 
+Use the String.valueOf method to convert an Integer to a String.
+
+Hint 2:
+Use a try/catch block to handle any exceptions.
+https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_exception_trycatch_example.htm
+
+Hint 3:
+Use the getMessage() method defined on the Exception class to obtain the exception message.
+
+-------------------------------
+SOLUTION:
+
+public String divide(Integer a, Integer b){
+    try {
+        Integer div = a / b;
+        return String.valueOf(div);
+    } catch(Exception e) {
+        return e.getMessage();
+    }
+}
