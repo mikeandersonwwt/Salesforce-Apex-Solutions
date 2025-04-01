@@ -1,0 +1,40 @@
+PROBLEM:
+#103 - Dynamic Field Values
+
+Implement the method getFieldsValue, which accepts the following inputs:
+* An account acc
+* A list of strings fields, with each string in the list representing a valid field on the account object.
+
+The method should return a list of values from the account record for fields listed in the list fields in the correct order.
+
+Given the following test code:
+Account acc = new Account(
+    Name = 'Salesforce', 
+    BillingCity = 'Boston', 
+    AnnualRevenue=10000, Rating='Hot');
+List fields = new List{'Industry','Name','Rating'};
+List result = getFieldsValue(acc, fields);
+
+result should be [null, 'Salesforce', 'Hot']
+
+Hint 1:
+Use the SObject.get method to dynamically obtain a field's value from an sObject record.
+
+Hint 2:
+You cannot add the value obtained using the SObject.get method directly into a List of Strings. 
+Use the String.valueOf to convert from Object to String before adding it to the list.
+
+-------------------------------
+SOLUTION:
+
+public List<String> getFieldsValue(Account acc, List<String> fields)
+{
+    // Create the new list
+    List<String> result = new List<String>();
+    // Loop over each field name in the fields list
+    for (String field : fields) {
+        // Get the value of the field and convert to string
+        result.add(String.valueOf(acc.get(field)));
+    }
+    return result;
+}

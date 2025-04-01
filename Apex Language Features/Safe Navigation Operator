@@ -1,0 +1,31 @@
+PROBLEM:
+#94 - Safe Navigation Operator
+
+Implement the method getAccountBillingCityWithSafeNavigation, which accepts a list of accounts 
+as an input and returns the BillingCity in upper case of the first account in the list. 
+Use the Safe Navigation (?.) to ensure null is returned in case the BillingCity is null.
+
+Given the following test code:
+List<Account> acts = new ListList<Account>();
+acts.add(new Account(Name = 'Acme', BillingCity = 'Chicago'));
+acts.add(new Account(Name = 'Dove', BillingCity = 'Boston'));
+String result = getAccountBillingCityWithSafeNavigation(acts);
+
+result should be 'CHICAGO'
+
+Hint 1:
+Use the toUpperCase method defined in the String class to convert the BillingCity to uppercase. 
+If the BillingCity is null, however, using the toUpperCase method would throw an exception which 
+can be prevented with the safe navigation operator.
+https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/langCon_apex_SafeNavigationOperator.htm
+
+Hint 2:
+It is possible to solve this with an if condition to check for a null value, but the 
+safe navigation operator offers a cleaner solution.
+
+-------------------------------
+SOLUTION:
+
+public String getAccountBillingCityWithSafeNavigation(List<Account> accounts){
+   return accounts?.get(0)?.BillingCity?.toUpperCase();
+}

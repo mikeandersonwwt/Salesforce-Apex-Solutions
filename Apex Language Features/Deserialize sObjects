@@ -1,0 +1,32 @@
+PROBLEM:
+#96 - Deserialize sObjects
+
+Implement the method getAccountsFromJSONString, which takes a JSON string of a list of accounts as an input and returns a list of accounts. If the input string is empty or null, return null.
+
+Given the following test code:
+
+String inputJSON = '[{"attributes":{"type":"Account","url":"/services/data/v55.0/sobjects/Account/00158000002zBhUAAU"},"Id":"00158000002zBhUAAU","Name":"Customer1"},{"attributes":{"type":"Account","url":"/services/data/v55.0/sobjects/Account/00158000002zBhWAAU"},"Id":"00158000002zBhWAAU","Name":"Customer2"}]';
+
+List<Account> result = getAccountsFromJSONString(inputJSON);
+accounts.add(new Account(Name = 'Dove', BillingCity = 'Boston'));
+result should be list of accounts (Account:{Id=00158000002zBhUAAU, Name=Customer1}, Account:{Id=00158000002zBhWAAU, Name=Customer2})
+
+Hint 1:
+Use the deserialize method to convert a JSON string into an Object.
+https://developer.salesforce.com/docs/atlas.en-us.apexref.meta/apexref/apex_class_System_Json.htm#apex_System_Json_deserialize
+
+Hint 2:
+JSON.deserialize returns an Object, but you need to return a List of Accounts. Make sure you cast the object into the correct type before returning.
+
+-------------------------------
+SOLUTION:
+
+public List<Account> getAccountsFromJSONString(String inputJSON){
+    // Check if the input JSON string is null or empty
+    if (String.isEmpty(inputJSON)) {
+        return null;
+    }
+    // Deserialize the JSON string into a list of accounts and return
+    List<Account> accounts = (List<Account>)JSON.deserialize(inputJSON, List<Account>.class);
+    return accounts;
+}
