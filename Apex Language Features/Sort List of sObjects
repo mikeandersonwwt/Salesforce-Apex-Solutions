@@ -1,0 +1,90 @@
+PROBLEM:
+#98 - Sort List of sObjects
+
+Implement the method getAccounts(), function, which accepts a list of accounts as input 
+and returns a new list of accounts sorted in descending order based on the Annual Revenue field.
+
+Given the following test code:
+List<Account> accounts = new List<Account>();
+accounts.add(new Account(Name='Accenture', AnnualRevenue = 30));
+accounts.add(new Account(Name='TCS',AnnualRevenue = 10));
+accounts.add( new Account( Name='Apple', AnnualRevenue = 100) );
+List<Account> result = getAccounts(accounts);
+result = (Account:{Name=Apple, AnnualRevenue=100}, Account:{Name=Accenture, AnnualRevenue=30}, Account:{Name=TCS, AnnualRevenue=10})
+
+Hint 1:
+To implement a custom sort order for sObjects in lists, create a wrapper class for the sObject and implement the Comparable interface. 
+The wrapper class contains the sObject in question and implements the compareTo method, in which you specify the sort logic.
+
+Reference: Salesforce Documentation: Custom list sorting
+https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_list_sorting_sobject.htm
+
+Example: https://focusonforce.com/development/sorting-lists-in-salesforce/?_ga=2.131909007.1642060214.1662207465-1365513640.1653890015
+
+Hint
+If facing the error Enclosing type for global methods in apex classes must be declared as global
+
+Use public instead of global while declaring wrapper class and overriding compareTo method. 
+The global keyword does not work Apex code is executed in an anonymous call.
+
+-------------------------------
+SOLUTION:
+
+public List<Account> getAccounts(List<Account> accounts) {
+    // Handle null input list
+    if (accounts == null) {
+        return null;  // Return null if the input list is null
+    }
+    
+    // Create a list of AccountWrapper objects
+    List<AccountWrapper> wrappedList = new List<AccountWrapper>();
+
+    // Wrap the Account objects in AccountWrapper
+    for (Account acc : accounts) {
+        if (acc != null) {  // Check if Account is not null before wrapping
+            wrappedList.add(new AccountWrapper(acc));
+        }
+    }
+
+    // Sort the wrapped list based on the compareTo method in AccountWrapper
+    wrappedList.sort();
+
+    // Create a new list to return the sorted Account objects
+    List<Account> sortedAccounts = new List<Account>();
+
+    // Extract the Account objects from the wrapper and add to the result list
+    for (AccountWrapper wrapper : wrappedList) {
+        sortedAccounts.add(wrapper.acc);
+    }
+
+    return sortedAccounts; // Return the sorted list of Account records
+}
+
+// write extra class here 
+public class AccountWrapper implements Comparable {
+    public Account acc; // The sObject (Account)
+    public Decimal annualRevenue; // The field we are sorting by
+
+    // Constructor to initialize the wrapper with an Account
+    public AccountWrapper(Account a) {
+        // Ensure that the Account is not null before accessing fields
+        if (a != null) {
+            acc = a;
+            annualRevenue = a.AnnualRevenue != null ? a.AnnualRevenue : 0; // Default to 0 if AnnualRevenue is null
+        }
+    }
+
+    // Implement compareTo method to sort by AnnualRevenue in descending order
+    public Integer compareTo(Object obj) {
+        AccountWrapper other = (AccountWrapper)obj;
+
+        // Sort in descending order by AnnualRevenue
+        if (this.annualRevenue > other.annualRevenue) {
+            return -1;  // This Account comes first
+        } else if (this.annualRevenue < other.annualRevenue) {
+            return 1;   // The other Account comes first
+        } else {
+            return 0;   // They are equal
+        }
+    }
+}
